@@ -1,75 +1,53 @@
-import * as _ from 'lodash'
+import isString from 'lodash.isstring'
+import isObject from 'lodash.isobject'
+import isFunction from 'lodash.isfunction'
 
-export class TipeTransform {
-  public data: JSON
-  public parser: string | Function
+import { IBlockData, ITipeTransformers } from './types'
+import { TransformerConstants } from './helpers/constants'
+import { transformHTML } from './transformers/html'
 
-  constructor(data: JSON, parser: string) { }
-  
-  parseHTML = (data: object) => data.blocks.reduce((html: any, block: any) => {
-    let element: any = ''
-    interface IListTypes {
-      ordered: string
-      unordered: string
-      [key: string]: string;
-    }
-    const listTypes: IListTypes = {
-      ordered: 'ordered',
-      unordered: 'unordered'
-    }
-  
-    switch (block.type) {
-      case 'header':
-        const {level, text} = block.data
-        element = `<h${level}>${text}</h${level}>`
-        break
-  
-      case 'paragraph':
-        element = `<p>${block.data.text}</p>`
-        break
-      
-      case 'list':
-        const {items, style} = block.data
-        const type: string = listTypes[style]
-        const li: string = items.map((i: any) => `<li>${i}</li>`).join('')
-  
-        element = `<${type}>${li}</${type}>`
-        break
-  
-      case 'delimiter':
-        element = '<hr>'
-        break
-  
-      case 'image':
-        const {file, caption} = block.data
-        element = `<img src="${file.url}" alt="${caption}" />`
-        break
-      default:
-        element = ''
-        break;
-    }
-  
-    return html + element
-  }, '')}
-
+export const tipeParsers: ITipeTransformers = {
+  html: transformHTML
 }
 
-export const transformer = (data: any, parser: string | Function) => { 
+export const validBlockData = (data: IBlockData): IBlockData => {
+  let blockData
 
-  // if parser is string, check for the parser internally
-
-  // if parser is string and we don't have it, throw
-  
-  // if parser is function, pass the function the data and return it
-
-  if (customParser && _.isFunction(customParser)) {
-    return customParser(data)
-  } else if(customParser && !_.isFunction(customParser)) {
-    throw 'Custom parser must be a function'
+  if (data && isString(data)) {
+    try {
+      blockData = JSON.parse(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
-  return 
+
+  if (data && isObject(data)) return data
+
+  return blockData
 }
 
-import tipeTransformer from '@tipe/tipe-transformer';
+export const validParser = (parser: string | Function): Function => {
+  if (isFunction(parser)) {
+    return parser
+  }
 
-const html = tipeTransformer(data, 'html')
+  if (isString(parser) && tipeParsers.hasOwnProperty(parser)) {
+    return tipeParsers[parser]
+  }
+
+  throw TransformerConstants.invalidParser
+}
+
+export const transformer = (
+  data: IBlockData,
+  parser: string | Function
+): string => {
+  const blockData = validBlockData(data)
+  const parseMethod = validParser(parser)
+
+  if (!data || !parser) throw TransformerConstants.missingArguments
+
+  if (!blockData || !parseMethod) throw TransformerConstants.somethingWentWrong
+
+  return parseMethod(blockData)
+}

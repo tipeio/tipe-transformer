@@ -4,14 +4,14 @@
       {
           "type" : "header",
           "data" : {
-              "text" : "Editor.js",
+              "text" : "Tipe.io",
               "level" : 2
           }
       },
       {
           "type" : "paragraph",
           "data" : {
-              "text" : "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+              "text" : "Take our new editor for a spin!"
           }
       },
       {
@@ -101,8 +101,8 @@
       {
           "type" : "list",
           "data" : {
-              "style" : "unordered",
-              "items" : []
+              "style" : "ordered",
+              "items" : ["item1", "item2"]
           }
       }
   ],
