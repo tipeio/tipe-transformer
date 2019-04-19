@@ -65,3 +65,6 @@ typings/
 
 #rollup
 .rpt2_cache
+
+#dist
+dist/
