@@ -2,9 +2,9 @@
   "name": "@tipe/transformer",
   "description": "Tipe transformer helpers for Javascript and Node.js",
   "version": "0.0.0-development",
-  "module": "dist/index.js",
-  "browser": "dist/index.js",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.bundle.js",
   "typings": "dist/_types/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
@@ -63,18 +63,17 @@
     "semantic-release-cli": "^4.1.2",
     "travis-deploy-once": "^5.0.11",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.3",
+    "rimraf": "^2.6.3"
   },
   "dependencies": {
     "@types/lodash": "^4.14.123",
     "@types/lodash.isfunction": "^3.0.6",
     "@types/lodash.isobject": "^3.0.6",
     "@types/lodash.isstring": "^4.0.6",
-    "lodash": "^4.17.11",
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1",
-    "rimraf": "^2.6.3"
+    "lodash.isstring": "^4.0.1"
   },
   "release": {
     "verifyConditions": [

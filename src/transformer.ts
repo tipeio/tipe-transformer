@@ -35,7 +35,7 @@ export const validParser = (parser: string | Function): Function => {
     return tipeParsers[parser]
   }
 
-  throw TransformerConstants.invalidParser
+  throw new Error(TransformerConstants.invalidParser)
 }
 
 export const transformer = (
@@ -45,9 +45,10 @@ export const transformer = (
   const blockData = validBlockData(data)
   const parseMethod = validParser(parser)
 
-  if (!data || !parser) throw TransformerConstants.missingArguments
+  if (!data || !parser) throw new Error(TransformerConstants.missingArguments)
 
-  if (!blockData || !parseMethod) throw TransformerConstants.somethingWentWrong
+  if (!blockData || !parseMethod)
+    throw new Error(TransformerConstants.somethingWentWrong)
 
   return parseMethod(blockData)
 }
