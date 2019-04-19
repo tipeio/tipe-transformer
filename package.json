@@ -1,0 +1,33 @@
+{
+  "name": "tipe-transformer",
+  "description": "",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.4.3",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.123",
+    "lodash": "^4.17.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tipeio/tipe-transformer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tipeio/tipe-transformer/issues"
+  },
+  "homepage": "https://github.com/tipeio/tipe-transformer#readme"
+}
