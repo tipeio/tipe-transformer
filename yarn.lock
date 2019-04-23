@@ -958,6 +958,19 @@
   resolved "https://registry.yarnpkg.com/@tipe/eslint-config-tipe/-/eslint-config-tipe-2.1.0.tgz#138a55e2b26e477cef7fca2944e19fb340018f38"
   integrity sha512-fgp8HHBL0gPkq1Bi0Ht6KAwSg/jMeMjN+Xwm4ypCGbb/ovCvfZPJ6mAoN5ozJVc1m8JKXYP0tIUeW3KhMigZTw==
 
+"@tipe/transformer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@tipe/transformer/-/transformer-1.0.0.tgz#d10865f77dbe7b6ddbac1ef13fbf29d604c3b33c"
+  integrity sha512-p0MjHjC+NrypjS7lxk0gkMCOe/w/qvAsW8UyYlgr8ZhD3+rRaqvpgMYxBth1sShg6iaZsMwGxNrzkR8WxVhDgg==
+  dependencies:
+    "@types/lodash" "^4.14.123"
+    "@types/lodash.isfunction" "^3.0.6"
+    "@types/lodash.isobject" "^3.0.6"
+    "@types/lodash.isstring" "^4.0.6"
+    lodash.isfunction "^3.0.9"
+    lodash.isobject "^3.0.2"
+    lodash.isstring "^4.0.1"
+
 "@types/babel__core@^7.1.0":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.1.tgz#ce9a9e5d92b7031421e1d0d74ae59f572ba48be6"

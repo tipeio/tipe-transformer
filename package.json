@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "rimraf dist && rollup -c && tsc",
+    "build": "rimraf dist && rollup -c",
     "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk ./node_modules/.bin/jest",
@@ -69,6 +69,7 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
+    "@tipe/transformer": "^1.0.0",
     "@types/lodash": "^4.14.123",
     "@types/lodash.isfunction": "^3.0.6",
     "@types/lodash.isobject": "^3.0.6",
