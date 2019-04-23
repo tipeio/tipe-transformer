@@ -18,6 +18,8 @@
   },
   "exclude": [
     "node_modules",
+    "coverage",
+    ".rpt2_cache",
     "**/*.spec.ts"
   ]
 }
