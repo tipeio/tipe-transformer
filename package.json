@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "browser": "dist/umd/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
@@ -44,6 +43,10 @@
     "@semantic-release/git": "^7.0.8",
     "@tipe/eslint-config-tipe": "^2.1.0",
     "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
+    "@types/lodash.isfunction": "^3.0.6",
+    "@types/lodash.isobject": "^3.0.6",
+    "@types/lodash.isstring": "^4.0.6",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "eslint": "^5.16.0",
@@ -71,11 +74,6 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "@tipe/transformer": "^1.0.0",
-    "@types/lodash": "^4.14.123",
-    "@types/lodash.isfunction": "^3.0.6",
-    "@types/lodash.isobject": "^3.0.6",
-    "@types/lodash.isstring": "^4.0.6",
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
     "lodash.isstring": "^4.0.1"
