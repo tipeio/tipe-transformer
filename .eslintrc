@@ -1,26 +1,39 @@
 {
-  "extends": [
-    "@tipe/eslint-config-tipe/server",
-    "plugin:@typescript-eslint/recommended"
-  ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "extends": [
+    "@tipe/eslint-config-tipe/server",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
     "indent": "off",
-    "@typescript-eslint/interface-name-prefix": [2, "always"],
-    "@typescript-eslint/member-delimiter-style": [2, {
-      "multiline": {
+    "@typescript-eslint/interface-name-prefix": [
+      2,
+      "always"
+    ],
+    "@typescript-eslint/member-delimiter-style": [
+      2,
+      {
+        "multiline": {
           "delimiter": "none",
           "requireLast": false
-      },
-      "singleline": {
+        },
+        "singleline": {
           "delimiter": "semi",
           "requireLast": false
+        }
       }
-    }],
-    "@typescript-eslint/indent": ["error", 2]
+    ],
+    "@typescript-eslint/indent": [
+      "error",
+      2
+    ]
   }
 }
