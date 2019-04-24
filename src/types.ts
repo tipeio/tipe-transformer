@@ -4,11 +4,11 @@ export interface ICollectionData {
 }
 
 export interface ISection {
-  [type: string]: Array<IBlock>
+  [type: string]: IBlock[]
 }
 
 export interface IBlock {
-  type: string,
+  type: string
   data: IBlockFields[]
 }
 
