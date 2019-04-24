@@ -1,12 +1,15 @@
-export interface IBlockData {
-  time: number
-  blocks: IBlock[]
-  version: string
+export interface ICollectionData {
+  id: number
+  sections: object
+}
+
+export interface ISection {
+  [type: string]: Array<IBlock>
 }
 
 export interface IBlock {
-  type: string
-  data: IBlockFields
+  type: string,
+  data: IBlockFields[]
 }
 
 export interface IBlockFields {

@@ -47,6 +47,7 @@
     "@types/lodash.isfunction": "^3.0.6",
     "@types/lodash.isobject": "^3.0.6",
     "@types/lodash.isstring": "^4.0.6",
+    "@types/lodash.reduce": "^4.6.6",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "eslint": "^5.16.0",
@@ -76,7 +77,8 @@
   "dependencies": {
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1"
+    "lodash.isstring": "^4.0.1",
+    "lodash.reduce": "^4.6.0"
   },
   "release": {
     "verifyConditions": [

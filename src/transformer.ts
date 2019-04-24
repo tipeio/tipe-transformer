@@ -2,7 +2,7 @@ import isString from 'lodash.isstring'
 import isObject from 'lodash.isobject'
 import isFunction from 'lodash.isfunction'
 
-import { IBlockData, ITipeTransformers } from './types'
+import { ICollectionData, ITipeTransformers } from './types'
 import { TransformerConstants } from './helpers/constants'
 import { transformHTML } from './transformers/html'
 
@@ -10,7 +10,7 @@ export const tipeParsers: ITipeTransformers = {
   html: transformHTML
 }
 
-export const validBlockData = (data: IBlockData): IBlockData => {
+export const validBlockData = (data: ICollectionData): ICollectionData => {
   let blockData
 
   if (data && isString(data)) {
@@ -39,7 +39,7 @@ export const validParser = (parser: string | Function): Function => {
 }
 
 export const transformer = (
-  data: IBlockData,
+  data: ICollectionData,
   parser: string | Function
 ): string => {
   const blockData = validBlockData(data)
