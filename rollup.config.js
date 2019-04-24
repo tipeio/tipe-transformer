@@ -4,6 +4,12 @@ import commonjs from 'rollup-plugin-commonjs'
 import pkg from './package.json'
 import { terser } from 'rollup-plugin-terser'
 
+const whiteList = {
+  'lodash.isstring': true,
+  'lodash.isfunction': true,
+  'lodash.isobject': true
+}
+
 const plugins = [
   resolve({
     customResolveOptions: {
@@ -21,7 +27,7 @@ export default [
     input: 'src/index.ts',
     plugins: [...plugins, terser()],
     output: {
-      file: pkg.browser,
+      file: 'dist/umd/index.js',
       format: 'umd',
       name: 'tipeTransformer',
       esModule: false,
@@ -45,6 +51,8 @@ export default [
         format: 'cjs'
       }
     ],
-    external: [...Object.keys(pkg.dependencies || {})]
+    external: [
+      ...Object.keys(pkg.dependencies).filter(dep => !whiteList[dep] || {})
+    ]
   }
 ]

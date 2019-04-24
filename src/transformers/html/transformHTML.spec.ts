@@ -1,6 +1,5 @@
 import { transformHTML } from './transformHTML'
 import { TransformerConstants } from '../../helpers/constants'
-import * as mockBlocks from './helpers/mockBlocks.json'
 
 describe('transformerHTML', () => {
   it('should correctly transform a header block', () => {
