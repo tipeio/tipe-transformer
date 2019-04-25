@@ -2,14 +2,13 @@
   "name": "@tipe/transformer",
   "description": "Tipe transformer helpers for Javascript and Node.js",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "browser": "dist/index.bundle.js",
-  "typings": "dist/_types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "rimraf dist && rollup -c && tsc",
+    "build": "rimraf dist && rollup -c",
     "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk ./node_modules/.bin/jest",
@@ -44,6 +43,11 @@
     "@semantic-release/git": "^7.0.8",
     "@tipe/eslint-config-tipe": "^2.1.0",
     "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
+    "@types/lodash.isfunction": "^3.0.6",
+    "@types/lodash.isobject": "^3.0.6",
+    "@types/lodash.isstring": "^4.0.6",
+    "@types/lodash.reduce": "^4.6.6",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "eslint": "^5.16.0",
@@ -60,6 +64,8 @@
     "prettier": "^1.17.0",
     "rimraf": "^2.6.3",
     "rollup": "^1.10.1",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.20.1",
     "semantic-release": "^15.13.3",
@@ -69,13 +75,10 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.123",
-    "@types/lodash.isfunction": "^3.0.6",
-    "@types/lodash.isobject": "^3.0.6",
-    "@types/lodash.isstring": "^4.0.6",
     "lodash.isfunction": "^3.0.9",
     "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1"
+    "lodash.isstring": "^4.0.1",
+    "lodash.reduce": "^4.6.0"
   },
   "release": {
     "verifyConditions": [

@@ -15,5 +15,11 @@
     "typeRoots": [
       "node_modules/@types"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "coverage",
+    ".rpt2_cache",
+    "**/*.spec.ts"
+  ]
 }

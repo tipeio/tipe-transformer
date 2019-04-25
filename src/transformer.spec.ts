@@ -18,7 +18,7 @@ describe('transformer', () => {
 
   it('should use a parser function if passed in', () => {
     const mockFunction = jest.fn()
-    const html = transformer(mockBlocks, mockFunction)
+    transformer(mockBlocks, mockFunction)
     expect(mockFunction).toHaveBeenCalled()
   })
 })
