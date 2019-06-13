@@ -6,6 +6,7 @@ import isArray from 'lodash.isarray'
 import { ISectionData, ITipeTransformers } from './types'
 import { TransformerConstants } from './helpers/constants'
 import { transformHTML } from './transformers/html'
+import { resolve } from 'dns'
 
 export const tipeParsers: ITipeTransformers = {
   html: transformHTML
@@ -41,38 +42,25 @@ export const validParser = (
 export const transformer = (
   data: ISectionData,
   parser: string | (() => string) | (() => string | string)[]
-): string => {
-  if (!data || !parser) throw new Error(TransformerConstants.missingArguments)
-
-  const blockData = validBlockData(data)
-  const tempHtml = {
-    customHtml: '',
-    tipeHtml: ''
-  }
-
-  // validate parsers in array
-  if (isArray(parser)) {
-    parser.forEach(
-      (customParser): void => {
-        const customParseMethod = validParser(customParser)
-        if (!blockData || !customParseMethod) {
-          throw new Error(TransformerConstants.somethingWentWrong)
-        }
-        tempHtml.customHtml += customParseMethod(blockData)
-        console.log('TCL: customParser tempHtml', tempHtml)
+): Promise<object> => {
+  return new Promise(
+    (resolve, reject): void => {
+      if (!data || !parser) {
+        reject(new Error(TransformerConstants.missingArguments))
       }
-    )
-  } else {
-    // validate parser
-    const parseMethod = validParser(parser)
 
-    if (!blockData || !parseMethod)
-      throw new Error(TransformerConstants.somethingWentWrong)
+      const blockData = validBlockData(data)
+      const parseMethod = validParser(parser)
 
-    tempHtml.tipeHtml += parseMethod(blockData)
-  }
-
-  const result = `${tempHtml.tipeHtml + tempHtml.customHtml}`
-  console.log('TCL: result', result)
-  return result
+      if (!blockData || !parseMethod) {
+        reject(new Error(TransformerConstants.somethingWentWrong))
+      }
+      const { blocks } = data
+      const result = {
+        result: parseMethod(blockData),
+        blocks
+      }
+      resolve(result)
+    }
+  )
 }
