@@ -21,4 +21,12 @@ describe('transformer', () => {
     transformer(mockBlocks, mockFunction)
     expect(mockFunction).toHaveBeenCalled()
   })
+
+  it('should use a every parser function if array of functions passed in', () => {
+    const mockFunction1 = jest.fn()
+    const mockFunction2 = jest.fn()
+    transformer(mockBlocks, [mockFunction1, mockFunction2])
+    expect(mockFunction2).toHaveBeenCalled()
+    expect(mockFunction1).toHaveBeenCalled()
+  })
 })

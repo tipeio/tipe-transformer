@@ -1027,6 +1027,13 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/lodash.isarray@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isarray/-/lodash.isarray-4.0.6.tgz#5979c4301508d9571dfb740b81a2f172b7382ade"
+  integrity sha512-lXLDKJ4jWhtAd6EVQOGHwX8iKJlITY5J+HAgim6oglepJrPXAv7hdoN7hrJSwpOYZ7oEpMng+bPasl4LZWp4GQ==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.isfunction@^3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.isfunction/-/lodash.isfunction-3.0.6.tgz#4b040bf914089ec34f0aacfef81a37237a0a8b8f"
@@ -5433,6 +5440,11 @@ lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.isarray@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-4.0.0.tgz#2aca496b28c4ca6d726715313590c02e6ea34403"
+  integrity sha1-KspJayjEym1yZxUxNZDALm6jRAM=
 
 lodash.isfunction@^3.0.9:
   version "3.0.9"

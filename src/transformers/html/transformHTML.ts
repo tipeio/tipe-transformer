@@ -1,67 +1,29 @@
 import reduce from 'lodash.reduce'
-import {
-  ICollectionData,
-  ISection,
-  IListTypes,
-  IBlockFields
-} from '../../types'
+import { ISectionData, IBlock } from '../../types'
 
-export const transformHTML = (data: ICollectionData): string => {
+export const transformHTML = (data: ISectionData): string => {
   return reduce(
-    data.sections,
-    (html: string, sectionVal: ISection[]): string => {
+    data.blocks,
+    (html: string, blockVal: IBlock): string => {
       let element: string
-
-      const listTypes: IListTypes = {
-        ordered: 'ol',
-        unordered: 'ul'
+      switch (blockVal.type) {
+        case 'text':
+          element = blockVal.content
+          break
+        case 'button':
+          element = `<button>${blockVal.content}</button>`
+          break
+        case 'image':
+          element = `<img src="${blockVal.content}" />`.replace(/\\"/g, '"')
+          break
+        case 'code':
+          element = `<pre><code>${blockVal.content}</code></pre>`
+          break
+        default:
+          element = ''
+          break
       }
-
-      sectionVal.forEach(
-        (block: IBlockFields): void => {
-          switch (block.type) {
-            case 'header':
-              const { level, text } = block.data
-              element = `<h${level}>${text}</h${level}>`
-              break
-
-            case 'paragraph':
-              element = `<p>${block.data.text}</p>`
-              break
-
-            case 'list':
-              const { items, style } = block.data
-
-              if (!items) throw new Error('items not defined!')
-              if (!style) throw new Error('style not defined!')
-
-              const type: string = listTypes[style]
-              const li: string = items
-                .map((i: string): string => `<li>${i}</li>`)
-                .join('')
-
-              element = `<${type}>${li}</${type}>`
-              break
-            case 'delimiter':
-              element = '<hr>'
-              break
-            case 'image':
-              const { file, caption } = block.data
-              if (!file) throw new Error('file not defined!')
-              element = `<img src="${file.url}" alt="${caption}" />`.replace(
-                /\\"/g,
-                '"'
-              )
-              break
-            default:
-              element = ''
-              break
-          }
-
-          html += element
-        }
-      )
-
+      html += element
       return html
     },
     ''
