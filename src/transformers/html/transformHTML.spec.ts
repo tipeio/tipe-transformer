@@ -12,7 +12,7 @@ describe('transformerHTML', () => {
         type: `text`
       }]
     }
-    const html = transformHTML(sectionData)
+    const html = transformHTML('', sectionData)
     expect(html).toBe(`<p>sdfasdfasdf</p>`)
   })
 
@@ -26,7 +26,7 @@ describe('transformerHTML', () => {
         type: `button`
       }]
     }
-    const html = transformHTML(sectionData)
+    const html = transformHTML('', sectionData)
     expect(html).toBe(`<button>button cta</button>`)
   })
 
@@ -40,7 +40,7 @@ describe('transformerHTML', () => {
         type: `image`
       }]
     }
-    const html = transformHTML(sectionData)
+    const html = transformHTML('', sectionData)
     expect(html).toBe(`<img src="https://dev.cdn.tipe.io/adfasdfasdf" />`)
   })
 
@@ -56,7 +56,7 @@ describe('transformerHTML', () => {
         type: `code`
       }]
     }
-    const html = transformHTML(sectionData)
+    const html = transformHTML('', sectionData)
     expect(html).toBe(`<pre><code>var tipe = clean</code></pre>`)
   })
 })

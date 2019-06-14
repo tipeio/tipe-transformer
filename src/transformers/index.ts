@@ -1,3 +1,4 @@
 import { transformHTML } from './html'
+import { transformMarkdown } from './markdown'
 
-export { transformHTML }
+export { transformHTML, transformMarkdown }

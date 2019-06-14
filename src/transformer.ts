@@ -1,13 +1,16 @@
 import isString from 'lodash.isstring'
 import isObject from 'lodash.isobject'
 import isFunction from 'lodash.isfunction'
+import isArray from 'lodash.isarray'
+import reduce from 'lodash.reduce'
 
 import { ISectionData, ITipeTransformers } from './types'
 import { TransformerConstants } from './helpers/constants'
-import { transformHTML } from './transformers/html'
+import { transformHTML, transformMarkdown } from './transformers'
 
 export const tipeParsers: ITipeTransformers = {
-  html: transformHTML
+  html: transformHTML,
+  markdown: transformMarkdown
 }
 
 export const validBlockData = (data: ISectionData): ISectionData => {
@@ -17,9 +20,12 @@ export const validBlockData = (data: ISectionData): ISectionData => {
     try {
       blockData = JSON.parse(data)
     } catch (error) {
-      console.error(error)
+      throw new Error(error)
     }
   }
+
+  if (blockData && !blockData.hasOwnProperty('blocks'))
+    throw new Error(TransformerConstants.blockDataMissing)
 
   if (data && isObject(data)) return data
 
@@ -27,8 +33,8 @@ export const validBlockData = (data: ISectionData): ISectionData => {
 }
 
 export const validParser = (
-  parser: string | (() => string) | (() => string | string)[]
-): ((data: ISectionData) => string) => {
+  parser: string | ((html: string, data: ISectionData) => string)
+): ((html: string, data: ISectionData) => string) => {
   if (isString(parser) && tipeParsers.hasOwnProperty(parser)) {
     return tipeParsers[parser]
   }
@@ -38,6 +44,35 @@ export const validParser = (
   }
 
   throw new Error(TransformerConstants.invalidParser)
+}
+
+export const handleParserArray = (
+  parserArr: string[] | (() => string)[],
+  blockData: ISectionData
+): { result: string; blocks: object } => {
+  const result = reduce(
+    parserArr,
+    (html: string, parseMethod: any): string => {
+      const validParseMethod = validParser(parseMethod)
+      html += validParseMethod('', blockData)
+      return html
+    },
+    ''
+  )
+
+  return { result, blocks: blockData }
+}
+
+export const handleSingleParser = (
+  parser: (() => string) | string | any,
+  blockData: ISectionData
+): { result: string; blocks: object } => {
+  const validParseMethod = validParser(parser)
+  const result = {
+    result: validParseMethod('', blockData),
+    blocks: blockData
+  }
+  return result
 }
 
 export const transformer = (
@@ -51,17 +86,16 @@ export const transformer = (
       }
 
       const blockData = validBlockData(data)
-      const parseMethod = validParser(parser)
 
-      if (!blockData || !parseMethod) {
+      if (!blockData) {
         reject(new Error(TransformerConstants.somethingWentWrong))
       }
-      const { blocks } = data
-      const result = {
-        result: parseMethod(blockData),
-        blocks
-      }
-      resolve(result)
+
+      // handle arrays
+      if (isArray(parser)) resolve(handleParserArray(parser, blockData))
+
+      // single parser passed in
+      resolve(handleSingleParser(parser, blockData))
     }
   )
 }
