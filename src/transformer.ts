@@ -4,7 +4,7 @@ import isFunction from 'lodash.isfunction'
 import isArray from 'lodash.isarray'
 import reduce from 'lodash.reduce'
 
-import { ISectionData, ITipeTransformers } from './types'
+import { ISectionData, ITipeTransformers, IBlock } from './types'
 import { TransformerConstants } from './helpers/constants'
 import { transformHTML, transformMarkdown } from './transformers'
 
@@ -13,7 +13,7 @@ export const tipeParsers: ITipeTransformers = {
   markdown: transformMarkdown
 }
 
-export const validBlockData = (data: ISectionData): ISectionData => {
+export const validateBlockData = (data: ISectionData): ISectionData => {
   let blockData
 
   if (data && isString(data)) {
@@ -33,8 +33,8 @@ export const validBlockData = (data: ISectionData): ISectionData => {
 }
 
 export const validParser = (
-  parser: string | ((html: string, data: ISectionData) => string)
-): ((html: string, data: ISectionData) => string) => {
+  parser: string | ((block: IBlock) => string)
+): ((block: IBlock) => string) => {
   if (isString(parser) && tipeParsers.hasOwnProperty(parser)) {
     return tipeParsers[parser]
   }
@@ -47,15 +47,20 @@ export const validParser = (
 }
 
 export const handleParserArray = (
-  parserArr: string[] | (() => string)[],
+  parserArr: string[] | (string | ((blocks: IBlock) => string))[],
   blockData: ISectionData
-): { result: string; blocks: object } => {
+): { result: string; blocks: ISectionData } => {
+  const { blocks } = blockData
   const result = reduce(
-    parserArr,
-    (html: string, parseMethod: any): string => {
-      const validParseMethod = validParser(parseMethod)
-      html += validParseMethod('', blockData)
-      return html
+    blocks,
+    (htmlResult: string, block: IBlock): string => {
+      parserArr.forEach(
+        (parser): void => {
+          const validParseMethod = validParser(parser)
+          htmlResult += validParseMethod(block)
+        }
+      )
+      return htmlResult
     },
     ''
   )
@@ -68,11 +73,19 @@ export const handleSingleParser = (
   blockData: ISectionData
 ): { result: string; blocks: object } => {
   const validParseMethod = validParser(parser)
-  const result = {
-    result: validParseMethod('', blockData),
+  const { blocks } = blockData
+  const result = reduce(
+    blocks,
+    (htmlResult: string, block: IBlock): string => {
+      htmlResult += validParseMethod(block)
+      return htmlResult
+    },
+    ''
+  )
+  return {
+    result,
     blocks: blockData
   }
-  return result
 }
 
 export const transformer = (
@@ -85,7 +98,7 @@ export const transformer = (
         reject(new Error(TransformerConstants.missingArguments))
       }
 
-      const blockData = validBlockData(data)
+      const blockData = validateBlockData(data)
 
       if (!blockData) {
         reject(new Error(TransformerConstants.somethingWentWrong))

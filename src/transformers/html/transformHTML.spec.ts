@@ -7,12 +7,13 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        id: 'asdfasdf',
+        apiId: 'asdfasdf',
         content: `<p>sdfasdfasdf</p>`,
         type: `text`
       }]
     }
-    const html = transformHTML('', sectionData)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
     expect(html).toBe(`<p>sdfasdfasdf</p>`)
   })
 
@@ -21,12 +22,13 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        id: 'asdfasdf',
+        apiId: 'asdfasdf',
         content: `button cta`,
         type: `button`
       }]
     }
-    const html = transformHTML('', sectionData)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
     expect(html).toBe(`<button>button cta</button>`)
   })
 
@@ -35,12 +37,13 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        id: 'asdfasdf',
+        apiId: 'asdfasdf',
         content: `https://dev.cdn.tipe.io/adfasdfasdf`,
         type: `image`
       }]
     }
-    const html = transformHTML('', sectionData)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
     expect(html).toBe(`<img src="https://dev.cdn.tipe.io/adfasdfasdf" />`)
   })
 
@@ -51,12 +54,13 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        id: 'asdfasdf',
+        apiId: 'asdfasdf',
         content: `var tipe = clean`,
         type: `code`
       }]
     }
-    const html = transformHTML('', sectionData)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
     expect(html).toBe(`<pre><code>var tipe = clean</code></pre>`)
   })
 })

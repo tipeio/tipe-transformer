@@ -14,7 +14,7 @@ export interface IBlock {
 }
 
 export interface ITipeTransformers {
-  [type: string]: (html: string, data: ISectionData) => string
-  html: (html: string, data: ISectionData) => string
-  markdown: (html: string, data: ISectionData) => string
+  [type: string]: (block: IBlock) => string
+  html: (block: IBlock) => string
+  markdown: (block: IBlock) => string
 }

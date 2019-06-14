@@ -1,29 +1,29 @@
 import reduce from 'lodash.reduce'
-import { ISectionData, IBlock } from '../../types'
+import { IBlock } from '../../types'
 
-export const transformHTML = (html: string, data: ISectionData): string => {
+export const transformHTML = (block: IBlock): string => {
   const result = reduce(
-    data.blocks,
-    (htmlResult: string, blockVal: IBlock): string => {
-      switch (blockVal.type) {
+    block,
+    (htmlResult: string, blockVal: any): string => {
+      switch (blockVal) {
         case 'text':
-          htmlResult += blockVal.content
+          htmlResult += block.content
           break
         case 'button':
-          htmlResult += `<button>${blockVal.content}</button>`
+          htmlResult += `<button>${block.content}</button>`
           break
         case 'image':
-          htmlResult += `<img src="${blockVal.content}" />`.replace(/\\"/g, '"')
+          htmlResult += `<img src="${block.content}" />`.replace(/\\"/g, '"')
           break
         case 'code':
-          htmlResult += `<pre><code>${blockVal.content}</code></pre>`
+          htmlResult += `<pre><code>${block.content}</code></pre>`
           break
         default:
           break
       }
       return htmlResult
     },
-    html
+    ''
   )
   return result
 }

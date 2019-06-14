@@ -5,12 +5,13 @@ describe('transformMarkdown', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        id: 'asdfasdf',
+        apiId: 'asdfasdf',
         content: `### header 3`,
         type: `markdown`
       }]
     }
-    const html = transformMarkdown('', sectionData)
+    const block = sectionData.blocks[0]
+    const html = transformMarkdown(block)
     expect(html).toBe(`<h3 id="header3">header 3</h3>`)
   })
 })
