@@ -7,10 +7,14 @@ export interface ISection {
   [type: string]: IBlock[]
 }
 
+export interface IBlockData {
+  lang?: string
+}
 export interface IBlock {
-  type: string
+  [type: string]: string | any
   apiId: string
   content: string
+  data?: IBlockData
 }
 
 export interface ITipeTransformers {

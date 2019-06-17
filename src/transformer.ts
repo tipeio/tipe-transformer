@@ -47,40 +47,40 @@ export const validParser = (
 }
 
 export const handleParserArray = (
-  parserArr: string[] | (string | ((blocks: IBlock) => string))[],
+  parserArr: string[] | (string | ((block: IBlock) => string))[],
   blockData: ISectionData
-): { result: string; blocks: ISectionData } => {
+): { result: string[]; blocks: ISectionData } => {
   const { blocks } = blockData
   const result = reduce(
     blocks,
-    (htmlResult: string, block: IBlock): string => {
+    (parsedResult: string[], block: IBlock): string[] => {
       parserArr.forEach(
         (parser): void => {
           const validParseMethod = validParser(parser)
-          htmlResult += validParseMethod(block)
+          parsedResult.push(validParseMethod(block))
         }
       )
-      return htmlResult
+      return parsedResult.filter(Boolean)
     },
-    ''
+    []
   )
 
   return { result, blocks: blockData }
 }
 
 export const handleSingleParser = (
-  parser: (() => string) | string | any,
+  parser: string | (() => string),
   blockData: ISectionData
-): { result: string; blocks: object } => {
+): { result: string[]; blocks: object } => {
   const validParseMethod = validParser(parser)
   const { blocks } = blockData
   const result = reduce(
     blocks,
-    (htmlResult: string, block: IBlock): string => {
-      htmlResult += validParseMethod(block)
-      return htmlResult
+    (parsedResult: string[], block: IBlock): string[] => {
+      parsedResult.push(validParseMethod(block))
+      return parsedResult.filter(Boolean)
     },
-    ''
+    []
   )
   return {
     result,
@@ -90,8 +90,8 @@ export const handleSingleParser = (
 
 export const transformer = (
   data: ISectionData,
-  parser: string | (() => string) | (() => string | string)[]
-): Promise<{ result: string; blocks: object }> => {
+  parser: string | (() => string) | any
+): Promise<{ result: string[]; blocks: object }> => {
   return new Promise(
     (resolve, reject): void => {
       if (!data || !parser) {

@@ -4,24 +4,28 @@ import { IBlock } from '../../types'
 export const transformHTML = (block: IBlock): string => {
   const result = reduce(
     block,
-    (htmlResult: string, blockVal: any): string => {
-      switch (blockVal) {
+    (parsedBlock: string, blockType: any): string => {
+      switch (blockType) {
         case 'text':
-          htmlResult += block.content
+          parsedBlock = block.content
           break
         case 'button':
-          htmlResult += `<button>${block.content}</button>`
+          parsedBlock = `<button>${block.content}</button>`
           break
         case 'image':
-          htmlResult += `<img src="${block.content}" />`.replace(/\\"/g, '"')
+          parsedBlock = `<img src="${block.content}" />`.replace(/\\"/g, '"')
           break
         case 'code':
-          htmlResult += `<pre><code>${block.content}</code></pre>`
+          if (block.data) {
+            parsedBlock = `<pre><code class="${block.data.lang} ${
+              block.data.lang
+            }-css">${block.content}</code></pre>`
+          }
           break
         default:
           break
       }
-      return htmlResult
+      return parsedBlock
     },
     ''
   )

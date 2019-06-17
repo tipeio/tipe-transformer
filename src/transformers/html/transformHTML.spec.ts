@@ -56,11 +56,14 @@ describe('transformerHTML', () => {
       blocks: [{
         apiId: 'asdfasdf',
         content: `var tipe = clean`,
-        type: `code`
+        type: `code`,
+        data: {
+          lang: 'javascript'
+        }
       }]
     }
     const block = sectionData.blocks[0]
     const html = transformHTML(block)
-    expect(html).toBe(`<pre><code>var tipe = clean</code></pre>`)
+    expect(html).toBe(`<pre><code class="javascript javascript-css">var tipe = clean</code></pre>`)
   })
 })
