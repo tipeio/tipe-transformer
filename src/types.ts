@@ -1,10 +1,8 @@
 export interface ISectionData {
-  apiId: string
-  blocks: object
-}
-
-export interface ISection {
-  [type: string]: IBlock[]
+  [type: string]: {
+    apiId: string
+    blocks: IBlock[]
+  }
 }
 
 export interface IBlockData {

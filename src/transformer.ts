@@ -3,6 +3,7 @@ import isObject from 'lodash.isobject'
 import isFunction from 'lodash.isfunction'
 import isArray from 'lodash.isarray'
 import reduce from 'lodash.reduce'
+import keyBy from 'lodash.keyby'
 
 import { ISectionData, ITipeTransformers, IBlock } from './types'
 import { TransformerConstants } from './helpers/constants'
@@ -48,9 +49,8 @@ export const validParser = (
 
 export const handleParserArray = (
   parserArr: string[] | (string | ((block: IBlock) => string))[],
-  blockData: ISectionData
-): { result: string[]; blocks: ISectionData } => {
-  const { blocks } = blockData
+  blocks: IBlock[]
+): string[] => {
   const result = reduce(
     blocks,
     (parsedResult: string[], block: IBlock): string[] => {
@@ -65,15 +65,14 @@ export const handleParserArray = (
     []
   )
 
-  return { result, blocks: blockData }
+  return result
 }
 
 export const handleSingleParser = (
   parser: string | (() => string),
-  blockData: ISectionData
-): { result: string[]; blocks: object } => {
+  blocks: IBlock[]
+): string[] => {
   const validParseMethod = validParser(parser)
-  const { blocks } = blockData
   const result = reduce(
     blocks,
     (parsedResult: string[], block: IBlock): string[] => {
@@ -82,33 +81,73 @@ export const handleSingleParser = (
     },
     []
   )
-  return {
-    result,
-    blocks: blockData
-  }
+  return result
 }
 
 export const transformer = (
-  data: ISectionData,
+  data: any,
   parser: string | (() => string) | any
-): Promise<{ result: string[]; blocks: object }> => {
+): Promise<{
+  result: { sections: { [type: string]: { apiId: string; blocks: IBlock[] } } }
+  data: { sections: ISectionData[] }
+}> => {
   return new Promise(
-    (resolve, reject): void => {
+    (resolve, reject): any => {
       if (!data || !parser) {
         reject(new Error(TransformerConstants.missingArguments))
       }
 
-      const blockData = validateBlockData(data)
+      // handle arrays
+      if (isArray(parser)) {
+        const result = Object.keys(data).map(
+          (apiId: string): any => {
+            const parsedSection = {
+              apiId,
+              blocks: reduce(
+                validateBlockData(data[apiId]),
+                (parsedBlock: string[], val: any): string[] => {
+                  if (isArray(val)) {
+                    return handleParserArray(parser, val)
+                  }
+                  return parsedBlock
+                },
+                []
+              )
+            }
+            return parsedSection
+          }
+        )
 
-      if (!blockData) {
-        reject(new Error(TransformerConstants.somethingWentWrong))
+        resolve({
+          result: { sections: keyBy(result, 'apiId') },
+          data: { sections: data }
+        })
       }
 
-      // handle arrays
-      if (isArray(parser)) resolve(handleParserArray(parser, blockData))
-
       // single parser passed in
-      resolve(handleSingleParser(parser, blockData))
+      const result = Object.keys(data).map(
+        (apiId: string): any => {
+          const parsedSection = {
+            apiId,
+            blocks: reduce(
+              validateBlockData(data[apiId]),
+              (parsedBlock, val): any => {
+                if (isArray(val)) {
+                  return handleSingleParser(parser, val)
+                }
+                return parsedBlock
+              },
+              []
+            )
+          }
+          return parsedSection
+        }
+      )
+
+      resolve({
+        result: { sections: keyBy(result, 'apiId') },
+        data: { sections: data }
+      })
     }
   )
 }
