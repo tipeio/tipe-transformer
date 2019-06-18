@@ -8,7 +8,8 @@ const whiteList = {
   'lodash.isstring': true,
   'lodash.isfunction': true,
   'lodash.isobject': true,
-  'lodash.isarray': true
+  'lodash.isarray': true,
+  'lodash.keyby': true
 }
 
 const plugins = [
@@ -36,7 +37,8 @@ export default [
         'lodash.isstring': 'isString',
         'lodash.isobject': 'isObject',
         'lodash.isfunction': 'isFunction',
-        'lodash.isarray': 'isArray'
+        'lodash.isarray': 'isArray',
+        'lodash.keyby': 'keyBy'
       }
     }
   },
