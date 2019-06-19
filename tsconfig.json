@@ -12,6 +12,7 @@
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types"
     ]
@@ -20,6 +21,6 @@
     "node_modules",
     "coverage",
     ".rpt2_cache",
-    "**/*.spec.ts"
+    "src/**/*.spec.ts"
   ]
 }

@@ -1027,6 +1027,13 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/lodash.isarray@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isarray/-/lodash.isarray-4.0.6.tgz#5979c4301508d9571dfb740b81a2f172b7382ade"
+  integrity sha512-lXLDKJ4jWhtAd6EVQOGHwX8iKJlITY5J+HAgim6oglepJrPXAv7hdoN7hrJSwpOYZ7oEpMng+bPasl4LZWp4GQ==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.isfunction@^3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.isfunction/-/lodash.isfunction-3.0.6.tgz#4b040bf914089ec34f0aacfef81a37237a0a8b8f"
@@ -1045,6 +1052,13 @@
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.isstring/-/lodash.isstring-4.0.6.tgz#1534d0c19a2ad79caa17558a298e366893ffd08c"
   integrity sha512-uUGvF9G1G7jQ5H42Y38GA9rZmUoY8wI/OMSwnW0BZA+Ra0uxzpuQf4CixXl3yG3TvF6LjuduMyt1WvKl+je8QA==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash.keyby@^4.6.6":
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.keyby/-/lodash.keyby-4.6.6.tgz#49fcbd6a42dae30f8b271bca4ecb076f310c129d"
+  integrity sha512-4Y6+lMFnMfB6FZoZbX4VB2puzIMDe0wDxMoxlOx4bNASAAgx3PtINs6+mcOUQzvljgFjy3GylRyZeCW6C2DwOQ==
   dependencies:
     "@types/lodash" "*"
 
@@ -1081,6 +1095,11 @@
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
+
+"@types/showdown@^1.9.3":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@types/showdown/-/showdown-1.9.3.tgz#eaa881b03a32d3720184731754d3025fc450b970"
+  integrity sha512-akvzSmrvY4J5d3tHzUUiQr0xpjd4Nb3uzWW6dtwzYJ+qW/KdWw5F8NLatnor5q/1LURHnzDA1ReEwCVqcatRnw==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -5434,6 +5453,11 @@ lodash.get@^4.4.2:
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
+lodash.isarray@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-4.0.0.tgz#2aca496b28c4ca6d726715313590c02e6ea34403"
+  integrity sha1-KspJayjEym1yZxUxNZDALm6jRAM=
+
 lodash.isfunction@^3.0.9:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
@@ -5453,6 +5477,11 @@ lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+
+lodash.keyby@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.keyby/-/lodash.keyby-4.6.0.tgz#7f6a1abda93fd24e22728a4d361ed8bcba5a4354"
+  integrity sha1-f2oavak/0k4icopNNh7YvLpaQ1Q=
 
 lodash.reduce@^4.6.0:
   version "4.6.0"
@@ -7882,6 +7911,13 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
+showdown@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/showdown/-/showdown-1.9.0.tgz#d49d2a0b6db21b7c2e96ef855f7b3b2a28ef46f4"
+  integrity sha512-x7xDCRIaOlicbC57nMhGfKamu+ghwsdVkHMttyn+DelwzuHOx4OHCVL/UW/2QOLH7BxfCcCCVVUix3boKXJKXQ==
+  dependencies:
+    yargs "^10.0.3"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -9041,12 +9077,37 @@ yargs-parser@^11.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
+yargs-parser@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-8.1.0.tgz#f1376a33b6629a5d063782944da732631e966950"
+  integrity sha512-yP+6QqN8BmrgW2ggLtTbdrOyBNSI7zBa4IykmiV5R1wl1JWNxQvWhMfMdmzIYtKU7oP3OOInY/tl2ov3BDjnJQ==
+  dependencies:
+    camelcase "^4.1.0"
+
 yargs-parser@^9.0.2:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-9.0.2.tgz#9ccf6a43460fe4ed40a9bb68f48d43b8a68cc077"
   integrity sha1-nM9qQ0YP5O1Aqbto9I1DuKaMwHc=
   dependencies:
     camelcase "^4.1.0"
+
+yargs@^10.0.3:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-10.1.2.tgz#454d074c2b16a51a43e2fb7807e4f9de69ccb5c5"
+  integrity sha512-ivSoxqBGYOqQVruxD35+EyCFDYNEFL/Uo6FcOnz+9xZdZzK0Zzw4r4KhbrME1Oo2gOggwJod2MnsdamSG7H9ig==
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^8.1.0"
 
 yargs@^11.0.0:
   version "11.1.0"

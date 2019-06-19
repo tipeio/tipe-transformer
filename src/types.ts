@@ -1,39 +1,22 @@
-export interface ICollectionData {
-  id: number
-  sections: object
-}
-
-export interface ISection {
-  [type: string]: IBlock[]
-}
-
-export interface IBlock {
-  type: string
-  data: IBlockFields[]
-}
-
-export interface IBlockFields {
-  text?: string
-  level?: number
-  style?: string
-  items?: string[]
-  file?: {
-    url: string
+export interface ISectionData {
+  [type: string]: {
+    apiId: string
+    blocks: IBlock[]
   }
-  caption?: string
-  withBorder?: boolean
-  withBackground?: boolean
-  stretched?: boolean
-  [type: string]: boolean | string | object | number | string[] | any
+}
+
+export interface IBlockData {
+  lang?: string
+}
+export interface IBlock {
+  [type: string]: string | any
+  apiId: string
+  content: string
+  data?: IBlockData
 }
 
 export interface ITipeTransformers {
-  [type: string]: Function
-  html: Function
-}
-
-export interface IListTypes {
-  ordered: string
-  unordered: string
-  [key: string]: string
+  [type: string]: (block: IBlock) => string
+  html: (block: IBlock) => string
+  markdown: (block: IBlock) => string
 }

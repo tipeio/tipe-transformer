@@ -2,115 +2,68 @@ import { transformHTML } from './transformHTML'
 import { TransformerConstants } from '../../helpers/constants'
 
 describe('transformerHTML', () => {
-  it('should correctly transform a header block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'header',
-            data: {
-              text: 'tipe.io',
-              level: 2
-            }
-          }
-        ]
-      }
+  // Text block
+  it('should correctly transform a text block', () => {
+    const sectionData = {
+      apiId: 'asdfasdf',
+      blocks: [{
+        apiId: 'asdfasdf',
+        content: `<p>sdfasdfasdf</p>`,
+        type: `text`
+      }]
     }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<h2>tipe.io</h2>`)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
+    expect(html).toBe(`<p>sdfasdfasdf</p>`)
   })
 
-  it('should correctly transform a paragraph block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'paragraph',
-            data: {
-              text: 'tipe.io'
-            }
-          }
-        ]
-      }
+  // Button block
+  it('should correctly transform a button block', () => {
+    const sectionData = {
+      apiId: 'asdfasdf',
+      blocks: [{
+        apiId: 'asdfasdf',
+        content: `button cta`,
+        type: `button`
+      }]
     }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<p>tipe.io</p>`)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
+    expect(html).toBe(`<button>button cta</button>`)
   })
 
-  it('should correctly transform an unordered list block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'list',
-            data: {
-              style: 'unordered',
-              items: ['tipe has improved our companies culture', 'tipe.io is my friend']
-            }
-          }
-        ]
-      }
-    }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<ul><li>tipe has improved our companies culture</li><li>tipe.io is my friend</li></ul>`)
-  })
-
-  it('should correctly transform an ordered list block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'list',
-            data: {
-              style: 'ordered',
-              items: ['tipe has improved our companies culture', 'tipe.io is my friend']
-            }
-          }
-        ]
-      }
-    }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<ol><li>tipe has improved our companies culture</li><li>tipe.io is my friend</li></ol>`)
-  })
-
-  it('should correctly transform a delimiter block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'delimiter',
-            data: {}
-          }
-        ]
-      }
-    }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<hr>`)
-  })
-
+  // Image block
   it('should correctly transform an image block', () => {
-    const collectionData = {
-      id: 1234,
-      sections: {
-        'section 1': [
-          {
-            type: 'image',
-            data: {
-              file: {
-                url: 'someurl'
-              },
-              caption: 'somecaption'
-            }
-          }
-        ]
-      }
+    const sectionData = {
+      apiId: 'asdfasdf',
+      blocks: [{
+        apiId: 'asdfasdf',
+        content: `https://dev.cdn.tipe.io/adfasdfasdf`,
+        type: `image`
+      }]
     }
-    const html = transformHTML(collectionData)
-    expect(html).toBe(`<img src="someurl" alt="somecaption" />`)
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
+    expect(html).toBe(`<img src="https://dev.cdn.tipe.io/adfasdfasdf" />`)
+  })
+
+  // Markdown block to be handled by user
+
+  // Code block
+  it('should correctly transform an code block', () => {
+    const sectionData = {
+      apiId: 'asdfasdf',
+      blocks: [{
+        apiId: 'asdfasdf',
+        content: `var tipe = clean`,
+        type: `code`,
+        data: {
+          lang: 'javascript'
+        }
+      }]
+    }
+    const block = sectionData.blocks[0]
+    const html = transformHTML(block)
+    expect(html).toBe(`<pre><code class="javascript javascript-css">var tipe = clean</code></pre>`)
   })
 })
