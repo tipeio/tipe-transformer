@@ -1,26 +1,49 @@
 import { transformer } from './transformer'
 import { TransformerConstants } from './helpers/constants'
-import * as mockBlocks from './helpers/mockBlocks.json'
+import mockBlocks from './helpers/mockBlocks'
 
 describe('transformer', () => {
-  it('should take a tipeParser name as a string and use the corresponding tipeParser', async () => {
-    const parsedValue = await transformer(mockBlocks, 'html')
-    const apiId = "hero"
-    expect(parsedValue.result.sections[apiId]).toBeTruthy()
-  })
-
-  it('should throw if the parser argument is a string and does not map to a tipeParser', async () => {
-    const htmlCaller = async () => {
-      await transformer(mockBlocks, 'foo')
-    }
-
-    await expect(htmlCaller()).rejects.toThrow(new Error(TransformerConstants.invalidParser))
-  })
-
   it('should use a parser function if passed in', () => {
     const mockFunction = jest.fn()
     transformer(mockBlocks, mockFunction)
     expect(mockFunction).toHaveBeenCalled()
   })
 
+  it('should use multiple parser functions if passed in', () => {
+    const mockFunction1 = jest.fn()
+    const mockFunction2 = jest.fn()
+    transformer(mockBlocks, [mockFunction1, mockFunction2])
+    expect(mockFunction1).toHaveBeenCalled()
+    expect(mockFunction2).toHaveBeenCalled()
+  })
+
+  it('should return the last defined value', () => {
+    const mockFunction1 = jest.fn().mockReturnValue('foo')
+    const mockFunction2 = jest.fn().mockReturnValue(undefined)
+    const mockFunction3 = jest.fn().mockReturnValue('bar')
+    const result = transformer({
+      Hero: {
+        apiId: 'Hero',
+        blocks: [
+          {}
+        ]
+      }
+    }, [mockFunction1, mockFunction2, mockFunction3])
+    expect(result.Hero.results[0]).toBe('bar')
+  })
+
+  it('should return the last defined truthy value', () => {
+    const mockFunction1 = jest.fn().mockReturnValue('foo')
+    const mockFunction2 = jest.fn().mockReturnValue(undefined)
+    const mockFunction3 = jest.fn().mockReturnValue(undefined)
+    const result = transformer({
+      Hero: {
+        apiId: 'Hero',
+        blocks: [
+          {}
+        ]
+      }
+    }, [mockFunction1, mockFunction2, mockFunction3])
+    expect(result.Hero.results[0]).toBe('foo')
+  })
 })

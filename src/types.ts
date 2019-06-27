@@ -5,6 +5,14 @@ export interface ISectionData {
   }
 }
 
+export interface IParsedSectionData {
+  [type: string]: {
+    apiId: string
+    blocks: IBlock[]
+    results: any[]
+  }
+}
+
 export interface IBlockData {
   lang?: string
 }

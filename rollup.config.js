@@ -5,11 +5,8 @@ import pkg from './package.json'
 import { terser } from 'rollup-plugin-terser'
 
 const whiteList = {
-  'lodash.isstring': true,
-  'lodash.isfunction': true,
-  'lodash.isobject': true,
   'lodash.isarray': true,
-  'lodash.keyby': true
+  'lodash.reduce': true
 }
 
 const plugins = [
@@ -34,11 +31,8 @@ export default [
       name: 'tipeTransformer',
       esModule: false,
       globals: {
-        'lodash.isstring': 'isString',
-        'lodash.isobject': 'isObject',
-        'lodash.isfunction': 'isFunction',
         'lodash.isarray': 'isArray',
-        'lodash.keyby': 'keyBy'
+        'lodash.reduce': 'reduce'
       }
     }
   },
