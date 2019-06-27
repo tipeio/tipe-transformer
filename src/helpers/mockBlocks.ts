@@ -1,4 +1,6 @@
-export default {
+import { ISections } from '../types'
+
+const sections: ISections = {
   hero: {
     apiId: 'hero',
     blocks: [
@@ -60,3 +62,5 @@ export default {
     ]
   }
 }
+
+export default sections

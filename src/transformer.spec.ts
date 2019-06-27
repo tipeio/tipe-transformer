@@ -1,6 +1,7 @@
 import { transformer } from './transformer'
 import { TransformerConstants } from './helpers/constants'
 import mockBlocks from './helpers/mockBlocks'
+import { IBlock } from './types'
 
 describe('transformer', () => {
   it('should use a parser function if passed in', () => {
@@ -24,9 +25,7 @@ describe('transformer', () => {
     const result = transformer({
       Hero: {
         apiId: 'Hero',
-        blocks: [
-          {}
-        ]
+        blocks: [(1) as unknown as IBlock]
       }
     }, [mockFunction1, mockFunction2, mockFunction3])
     expect(result.Hero.results[0]).toBe('bar')
@@ -39,9 +38,7 @@ describe('transformer', () => {
     const result = transformer({
       Hero: {
         apiId: 'Hero',
-        blocks: [
-          {}
-        ]
+        blocks: [(1) as unknown as IBlock]
       }
     }, [mockFunction1, mockFunction2, mockFunction3])
     expect(result.Hero.results[0]).toBe('foo')
