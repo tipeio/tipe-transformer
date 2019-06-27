@@ -1,5 +1,11 @@
 import reduce from 'lodash.reduce'
-import { ISections, ITransformedSections, IBlock, TransformerPlugin, ISection } from './types'
+import {
+  ISections,
+  ITransformedSections,
+  IBlock,
+  TransformerPlugin,
+  ISection
+} from './types'
 import { transformHTML, transformMarkdown } from './transformers'
 export { transformHTML, transformMarkdown }
 
@@ -16,23 +22,28 @@ export const transformer = (
 
   return reduce(
     sections,
-    (transformedSections: ITransformedSections, section: ISection): ITransformedSections => {
+    (
+      transformedSections: ITransformedSections,
+      section: ISection
+    ): ITransformedSections => {
       let tempSection = {
         apiId: section.apiId,
         blocks: section.blocks,
-        results: section.blocks.map((block: IBlock) => reduce(
-          plugins,
-          (blockResult: any, currentplugin: TransformerPlugin): IBlock => {
-            let parsedResult = currentplugin(block)
+        results: section.blocks.map((block: IBlock) =>
+          reduce(
+            plugins,
+            (blockResult: any, currentplugin: TransformerPlugin): IBlock => {
+              let parsedResult = currentplugin(block)
 
-            if (parsedResult) {
-              blockResult = parsedResult
-            }
+              if (parsedResult) {
+                blockResult = parsedResult
+              }
 
-            return blockResult
-          },
-          null
-        ))
+              return blockResult
+            },
+            null
+          )
+        )
       }
 
       transformedSections[section.apiId] = tempSection
