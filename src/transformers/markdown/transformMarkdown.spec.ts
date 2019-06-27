@@ -5,7 +5,7 @@ describe('transformMarkdown', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        apiId: 'asdfasdf',
+        id: 'asdfasdf',
         content: `### header 3`,
         type: `markdown`
       }]

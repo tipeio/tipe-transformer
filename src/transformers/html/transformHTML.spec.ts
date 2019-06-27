@@ -7,7 +7,7 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        apiId: 'asdfasdf',
+        id: 'asdfasdf',
         content: `<p>sdfasdfasdf</p>`,
         type: `text`
       }]
@@ -22,7 +22,7 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        apiId: 'asdfasdf',
+        id: 'asdfasdf',
         content: `button cta`,
         type: `button`
       }]
@@ -37,7 +37,7 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        apiId: 'asdfasdf',
+        id: 'asdfasdf',
         content: `https://dev.cdn.tipe.io/adfasdfasdf`,
         type: `image`
       }]
@@ -54,7 +54,7 @@ describe('transformerHTML', () => {
     const sectionData = {
       apiId: 'asdfasdf',
       blocks: [{
-        apiId: 'asdfasdf',
+        id: 'asdfasdf',
         content: `var tipe = clean`,
         type: `code`,
         data: {
