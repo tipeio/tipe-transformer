@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/tipeio/tipe-transformer/compare/v1.1.0...v1.1.1) (2019-06-28)
+
+
+### Bug Fixes
+
+* **prettier:** fix lint ([153e0d2](https://github.com/tipeio/tipe-transformer/commit/153e0d2))
+* **test:** fix tests ([79b8d58](https://github.com/tipeio/tipe-transformer/commit/79b8d58))
+* **transformer:** Remove unneccesary validations ([45fa650](https://github.com/tipeio/tipe-transformer/commit/45fa650))
+* **types:** fix types ([4dae6c0](https://github.com/tipeio/tipe-transformer/commit/4dae6c0))
+
 # [1.1.0](https://github.com/tipeio/tipe-transformer/compare/v1.0.1...v1.1.0) (2019-06-19)
 
 
