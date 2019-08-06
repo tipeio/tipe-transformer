@@ -1,29 +1,37 @@
 export interface ISection {
+  name: string
   apiId: string
   blocks: IBlock[]
 }
 
-export interface ITransformedSection extends ISection {
-  results: any[]
+export interface IParsedSection {
+  name: string
+  apiId: string
+  blocks: IBlockResult[]
+}
+
+export interface ITransformedSections {
+  [key: string]: ISection
 }
 
 export interface ISections {
   [type: string]: ISection
 }
 
-export interface ITransformedSections {
-  [type: string]: ITransformedSection
-}
-
-export interface IBlockData {
-  [field: string]: any
-}
-
 export interface IBlock {
   id: string
   type: string
   content: string
-  data?: IBlockData
+  data?: any
+}
+
+export interface IParsedBlock {
+  [type: string]: any
+}
+
+export interface IBlockResult {
+  block: IBlock
+  result: IParsedBlock | string
 }
 
 export interface ITipeTransformers {

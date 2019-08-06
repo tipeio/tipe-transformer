@@ -1,7 +1,8 @@
-import { ISections } from '../types'
+import { ISection } from '../types'
 
-const sections: ISections = {
-  hero: {
+const sections: ISection[] = [
+  {
+    name: 'hero',
     apiId: 'hero',
     blocks: [
       {
@@ -31,7 +32,8 @@ const sections: ISections = {
       }
     ]
   },
-  body: {
+  {
+    name: 'body',
     apiId: 'body',
     blocks: [
       {
@@ -61,6 +63,6 @@ const sections: ISections = {
       }
     ]
   }
-}
+]
 
 export default sections

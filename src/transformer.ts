@@ -1,16 +1,18 @@
 import reduce from 'lodash.reduce'
+import keyBy from 'lodash.keyby'
 import {
-  ISections,
-  ITransformedSections,
   IBlock,
   TransformerPlugin,
+  ITransformedSections,
+  IParsedSection,
+  IBlockResult,
   ISection
 } from './types'
 import { transformHTML, transformMarkdown } from './transformers'
 export { transformHTML, transformMarkdown }
 
-export const transformer = (
-  sections: ISections,
+export const transform = (
+  sections: ISection[],
   plugin: TransformerPlugin | TransformerPlugin[]
 ): ITransformedSections => {
   let plugins: TransformerPlugin[] = plugin as TransformerPlugin[]
@@ -20,35 +22,38 @@ export const transformer = (
     plugins = [plugin as TransformerPlugin]
   }
 
-  return reduce(
+  const transformedSections = reduce(
     sections,
     (
-      transformedSections: ITransformedSections,
-      section: ISection
-    ): ITransformedSections => {
+      transformedSections: ITransformedSections[] | Array<any>,
+      section: ISection,
+      index
+    ): IParsedSection[] | Array<any> => {
       let tempSection = {
+        name: section.name,
         apiId: section.apiId,
-        blocks: section.blocks,
-        results: section.blocks.map((block: IBlock) =>
-          reduce(
-            plugins,
-            (blockResult: any, currentplugin: TransformerPlugin): IBlock => {
-              let parsedResult = currentplugin(block)
+        blocks: section.blocks.map((block: IBlock) =>
+        reduce(
+          plugins,
+          (blockResult: any, currentplugin: TransformerPlugin): IBlockResult | any => {
+            let parsedResult = currentplugin(block)
 
-              if (parsedResult) {
-                blockResult = parsedResult
-              }
+            if (parsedResult) {
+              blockResult = {block, result: parsedResult}
+            }
 
-              return blockResult
-            },
-            null
-          )
+            return blockResult
+          },
+          null
         )
+      )
       }
 
-      transformedSections[section.apiId] = tempSection
+      transformedSections[index] = tempSection
       return transformedSections
     },
-    {}
+    []
   )
+
+  return keyBy(transformedSections, 'apiId')
 }

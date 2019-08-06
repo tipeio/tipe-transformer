@@ -1,5 +1,4 @@
 import { transformHTML } from './transformHTML'
-import { TransformerConstants } from '../../helpers/constants'
 
 describe('transformerHTML', () => {
   // Text block
