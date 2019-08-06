@@ -11,7 +11,7 @@ export interface IParsedSection {
 }
 
 export interface ITransformedSections {
-  [key: string]: ISection
+  [key: string]: IParsedSection
 }
 
 export interface ISections {
@@ -33,6 +33,8 @@ export interface IBlockResult {
   block: IBlock
   result: IParsedBlock | string
 }
+
+export type IBlockType = 'image' | 'text' | 'markdown' | 'button' | 'code'
 
 export interface ITipeTransformers {
   [type: string]: (block: IBlock) => string

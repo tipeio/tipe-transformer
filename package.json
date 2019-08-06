@@ -6,7 +6,7 @@
   "module": "dist/esm/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "eslint --fix 'src/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "rimraf dist && rollup -c",
     "test": "jest --detectOpenHandles",
@@ -45,7 +45,6 @@
     "@types/jest": "^24.0.11",
     "@types/lodash": "^4.14.123",
     "@types/lodash.isarray": "^4.0.6",
-    "@types/lodash.keyby": "^4.6.6",
     "@types/lodash.reduce": "^4.6.6",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
@@ -76,7 +75,6 @@
   "dependencies": {
     "@types/showdown": "^1.9.3",
     "lodash.isarray": "^4.0.0",
-    "lodash.keyby": "^4.6.0",
     "lodash.reduce": "^4.6.0",
     "showdown": "^1.9.0"
   },

@@ -1,10 +1,10 @@
 import reduce from 'lodash.reduce'
-import { IBlock } from '../../types'
+import { IBlock, IBlockType } from '../../types'
 
 export const transformHTML = (block: IBlock): string => {
   const result = reduce(
     block,
-    (parsedBlock: string, blockType: any): string => {
+    (parsedBlock: string, blockType: IBlockType): string => {
       switch (blockType) {
         case 'text':
           parsedBlock = block.content

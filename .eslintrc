@@ -4,15 +4,11 @@
     "project": "./tsconfig.json"
   },
   "extends": [
-    "@tipe/eslint-config-tipe/server",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
   ],
   "plugins": [
     "@typescript-eslint",
-    "prettier"
   ],
   "rules": {
     "indent": "off",
@@ -34,7 +30,7 @@
       }
     ],
     "@typescript-eslint/indent": [
-      "error",
+      "warn",
       2
     ]
   }

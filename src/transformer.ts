@@ -1,5 +1,4 @@
 import reduce from 'lodash.reduce'
-import keyBy from 'lodash.keyby'
 import {
   IBlock,
   TransformerPlugin,
@@ -22,38 +21,38 @@ export const transform = (
     plugins = [plugin as TransformerPlugin]
   }
 
-  const transformedSections = reduce(
+  return reduce(
     sections,
     (
-      transformedSections: ITransformedSections[] | Array<any>,
-      section: ISection,
-      index
-    ): IParsedSection[] | Array<any> => {
+      transformedSections: ITransformedSections[] | any,
+      section: ISection
+    ): IParsedSection[] | ISection[] => {
       let tempSection = {
         name: section.name,
         apiId: section.apiId,
-        blocks: section.blocks.map((block: IBlock) =>
-        reduce(
-          plugins,
-          (blockResult: any, currentplugin: TransformerPlugin): IBlockResult | any => {
-            let parsedResult = currentplugin(block)
+        blocks: section.blocks.map((block: IBlock): IBlockResult[] | null =>
+          reduce(
+            plugins,
+            (
+              blockResult: IBlockResult | any,
+              currentplugin: TransformerPlugin
+            ): IBlockResult[] => {
+              let parsedResult = currentplugin(block)
 
-            if (parsedResult) {
-              blockResult = {block, result: parsedResult}
-            }
+              if (parsedResult) {
+                blockResult = { block, result: parsedResult }
+              }
 
-            return blockResult
-          },
-          null
+              return blockResult
+            },
+            null
+          )
         )
-      )
       }
 
-      transformedSections[index] = tempSection
+      transformedSections[section.apiId] = tempSection
       return transformedSections
     },
-    []
+    {}
   )
-
-  return keyBy(transformedSections, 'apiId')
 }
