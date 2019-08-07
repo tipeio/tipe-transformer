@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/tipeio/tipe-transformer/compare/v1.1.1...v1.1.2) (2019-08-07)
+
+
+### Bug Fixes
+
+* **linting:** Update linting ([c4afc50](https://github.com/tipeio/tipe-transformer/commit/c4afc50))
+* **ouput:** Change transformer exported name ([9271319](https://github.com/tipeio/tipe-transformer/commit/9271319))
+
 ## [1.1.1](https://github.com/tipeio/tipe-transformer/compare/v1.1.0...v1.1.1) (2019-06-28)
 
 
