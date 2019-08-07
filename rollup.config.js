@@ -1,7 +1,8 @@
 import typescript from 'rollup-plugin-typescript2'
+import json from 'rollup-plugin-json'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
-import pkg from './package.json'
+import { main, browser, module, dependencies } from './package.json'
 import { terser } from 'rollup-plugin-terser'
 
 const whiteList = {
@@ -17,8 +18,10 @@ const plugins = [
   }),
   commonjs(),
   typescript({
-    typescript: require('typescript')
-  })
+    typescript: require('typescript'),
+    tsconfig: 'tsconfig.json'
+  }),
+  json()
 ]
 
 export default [
@@ -26,10 +29,11 @@ export default [
     input: 'src/index.ts',
     plugins: [...plugins, terser()],
     output: {
-      file: 'dist/umd/index.js',
+      file: module,
       format: 'umd',
-      name: 'tipeTransformer',
+      name: 'transform',
       esModule: false,
+      exports: 'named',
       globals: {
         'lodash.isarray': 'isArray',
         'lodash.reduce': 'reduce'
@@ -41,16 +45,16 @@ export default [
     plugins,
     output: [
       {
-        file: pkg.module,
+        file: browser,
         format: 'esm'
       },
       {
-        file: pkg.main,
+        file: main,
         format: 'cjs'
       }
     ],
     external: [
-      ...Object.keys(pkg.dependencies).filter(dep => !whiteList[dep] || {})
+      ...Object.keys(dependencies).filter(dep => !whiteList[dep] || {})
     ]
   }
 ]
