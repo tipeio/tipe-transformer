@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/tipeio/tipe-transformer/compare/v1.1.2...v1.1.3) (2019-08-07)
+
+
+### Bug Fixes
+
+* **rollup:** Update rollup output ([f51c326](https://github.com/tipeio/tipe-transformer/commit/f51c326))
+
 ## [1.1.2](https://github.com/tipeio/tipe-transformer/compare/v1.1.1...v1.1.2) (2019-08-07)
 
 
