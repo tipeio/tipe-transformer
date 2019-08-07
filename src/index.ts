@@ -1,3 +1,3 @@
-import { transformer } from './transformer'
+import { transform, transformHTML, transformMarkdown } from './transformer'
 
-export default transformer
+export { transform, transformHTML, transformMarkdown }
