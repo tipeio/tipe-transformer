@@ -3,8 +3,13 @@ Tipe transformer helpers for Javascript and Node.js
 [Docs](beta.tipe.io/developers)
 
 ```js
+// esm
 import { transform, transformHTML, transformMarkdown } from '@tipe/transformer'
 import { createClient } from '@tipe/js'
+
+// cjs
+const { transform, transformHTML, transformMarkdown } = require('@tipe/transformer')
+const { createClient } = require('@tipe/js')
 
 // Tipe Data
 const content = transform(/* [TipeData] */, [/*plugins*/])
